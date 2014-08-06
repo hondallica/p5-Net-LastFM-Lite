@@ -44,6 +44,41 @@ has 'http' => (
 );
 
 
+sub request {
+    my ($self, %query_param) = @_;
+    return $self->_make_request(\%query_param);
+}
+
+sub _make_request {
+    my ( $self, $query_param ) = @_;
+
+    my $query_string = URI->new;
+    $query_string->query_param( 'format', 'json' );
+    $query_string->query_param( 'api_key', $self->api_key );
+    map {
+        $query_string->query_param( $_, $query_param->{$_} )
+    } keys %$query_param;
+
+    my ($minor_version, $code, $message, $headers, $content) = 
+    $self->http->request(
+        scheme => 'http',
+        host => 'ws.audioscrobbler.com',
+        path_query => "2.0/$query_string",
+        method => 'GET',
+    );
+    my $data = decode_json( $content );
+
+    if ( defined $data->{error} ) {
+        my $code = $data->{error};
+        my $message = $data->{message};
+        confess "$code: $message";
+    } else {
+        return $data;
+    }
+}
+
+
+
 1;
 __END__
 
