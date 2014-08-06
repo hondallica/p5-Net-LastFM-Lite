@@ -29,6 +29,12 @@ has 'api_secret' => (
     default => $ENV{LASTFM_API_SECRET},
 );
 
+has 'format' => (
+    is => 'rw',
+    required => 1,
+    default => 'json',
+);
+
 has 'http' => (
     is => 'rw',
     required => 1,
@@ -53,7 +59,7 @@ sub _make_request {
     my ( $self, $query_param ) = @_;
 
     my $query_string = URI->new;
-    $query_string->query_param( 'format', 'json' );
+    $query_string->query_param( 'format', $self->format );
     $query_string->query_param( 'api_key', $self->api_key );
     map {
         $query_string->query_param( $_, $query_param->{$_} )
