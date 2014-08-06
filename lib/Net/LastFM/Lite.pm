@@ -13,6 +13,8 @@ use namespace::clean;
 our $VERSION = "0.01";
 
 
+$Net::DNS::Lite::CACHE = Cache::LRU->new( size => 512 );
+
 has 'api_key' => (
     is => 'rw',
     isa => sub { die "Invalid api_key" unless $_[0] =~ /^[0-9a-z]{32}$/},
