@@ -29,6 +29,20 @@ has 'api_secret' => (
     default => $ENV{LASTFM_API_SECRET},
 );
 
+has 'http' => (
+    is => 'rw',
+    required => 1,
+    default  => sub {
+        my $http = Furl::HTTP->new(
+            inet_aton => \&Net::DNS::Lite::inet_aton,
+            agent => 'Net::LastFM::Lite' . $VERSION,
+            headers => [ 'Accept-Encoding' => 'gzip',],
+        );
+        $http->env_proxy;
+        return $http;
+    },
+);
+
 
 1;
 __END__
