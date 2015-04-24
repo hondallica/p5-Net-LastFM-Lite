@@ -98,13 +98,13 @@ Net::LastFM::Lite - A simple and fast interface to the Last.fm API
 
     use Net::LastFM::Lite;
 
-    my $lastfm = Net::LastFM->new(
+    my $lastfm = Net::LastFM::Lite->new(
         api_key    => 'YOUR_API_KEY',
         api_secret => 'YOUR_API_SECRET',
     );
     
     # or default values $ENV{'LASTFM_API_KEY'} and $ENV{'LASTFM_API_SECRET'}
-    my $lastfm = Net::LastFM->new();
+    my $lastfm = Net::LastFM::Lite->new();
 
     my $data = $lastfm->request(
         method => 'artist.getInfo',

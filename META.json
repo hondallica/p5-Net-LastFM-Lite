@@ -4,7 +4,7 @@
       "Hondallica <hondallica@gmail.com>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Minilla/v2.1.1, CPAN::Meta::Converter version 2.141520",
+   "generated_by" : "Minilla/v2.3.0, CPAN::Meta::Converter version 2.150001",
    "license" : [
       "perl_5"
    ],
@@ -58,7 +58,8 @@
       },
       "homepage" : "https://github.com/hondallica/p5-Net-LastFM-Lite",
       "repository" : {
-         "url" : "https://github.com/hondallica/p5-Net-LastFM-Lite.git",
+         "type" : "git",
+         "url" : "git://github.com/hondallica/p5-Net-LastFM-Lite.git",
          "web" : "https://github.com/hondallica/p5-Net-LastFM-Lite"
       }
    },
